@@ -1,0 +1,28 @@
+---
+# tasks file for network
+- name: insert bridge device for docker
+  blockinfile:
+    dest: /etc/network/interfaces
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    insertafter: "#VAGRANT-END"
+    content: |
+      auto br0
+        iface br0 inet static
+        address {{ bridge_ip }}
+        netmask 255.255.255.0
+        bridge_ports eth2
+        bridge_stp off
+        bridge_fd 0
+- name: bridge utils install
+  apt: name=bridge-utils update_cache=yes
+- name: activate bridge device
+  command: /sbin/ifup br0
+- name: route check
+  shell: /bin/netstat -arn|grep 255.255.0.0| grep {{ ip_range }}
+  register: route_result
+  ignore_errors: True
+- name: add route {{ ip_range }}/255.255.0.0
+  command: /sbin/route add -net {{ ip_range }} netmask 255.255.0.0 br0
+  when: route_result|failed
+- name: rerun facts
+  action: setup

@@ -1,0 +1,5 @@
+---
+- hosts: openstack
+  become: yes
+  roles:
+    - packstack
