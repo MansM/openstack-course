@@ -7,14 +7,15 @@
 - name: create os project
   os_project:
     state: present
-    name: mansproject
+    name: "{{ PERSONAL_USER }}project"
     domain: Default
-    description: mansdescript
+    description: "{{ PERSONAL_USER }}descript"
     enabled: True
 - name: create os user
+  #command: openstack user create mans --password mans --project mansproject --enable
   os_user:
+    auth: '{{ auth_dict }}'
     state: present
-    name: mans
-    password: mans
-    email: demo@example.com
-    default_project: mansproject
+    name: "{{ PERSONAL_USER }}"
+    password: "{{ PERSONAL_USER }}"
+    default_project: "{{ PERSONAL_USER }}project"

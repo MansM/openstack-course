@@ -9,9 +9,15 @@
   become: yes
   environment:
     OS_REGION_NAMER: RegionOne
-    OS_PASSWORD: password
+    OS_PASSWORD: '{{ CONFIG_KEYSTONE_ADMIN_PW }}'
     OS_AUTH_URL: http://192.168.4.2:5000/v2.0
     OS_USERNAME: admin
     OS_TENANT_NAME: admin
+  vars:
+    auth_dict:
+      password: '{{ CONFIG_KEYSTONE_ADMIN_PW }}'
+      auth_url: http://192.168.4.2:5000/v2.0
+      username: admin
+    #WORKAROUND: https://github.com/ansible/ansible-modules-core/issues/4520
   roles:
     - week4
