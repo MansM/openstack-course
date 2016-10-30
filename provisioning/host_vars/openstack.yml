@@ -1,2 +1,3 @@
 ---
 bridge_ip: 192.168.4.2
+second_nic_ip: 192.168.4.2

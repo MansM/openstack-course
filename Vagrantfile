@@ -5,8 +5,13 @@ Vagrant.configure(2) do |config|
   else
     abort("Please install the hostmanager plugin, vagrant plugin install vagrant-hostmanager")
   end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+    config.cache.enable :yum
+  end
   
-  config.vm.box = "centos/7"
+  config.vm.box = "mansm/CentOS-7"
   config.ssh.insert_key = false
 
   config.vm.define "openstack" do |openstack|

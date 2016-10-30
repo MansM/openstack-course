@@ -1,0 +1,20 @@
+- name: install pip
+  yum: name=python-pip state=present
+- name: install shade
+  pip: name=shade state=present
+
+
+- name: create os project
+  os_project:
+    state: present
+    name: mansproject
+    domain: Default
+    description: mansdescript
+    enabled: True
+- name: create os user
+  os_user:
+    state: present
+    name: mans
+    password: mans
+    email: demo@example.com
+    default_project: mansproject

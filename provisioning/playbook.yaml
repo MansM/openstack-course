@@ -1,5 +1,17 @@
 ---
+# - hosts: openstack
+#   become: yes
+#   roles:
+#     - packstack
+
+
 - hosts: openstack
   become: yes
+  environment:
+    OS_REGION_NAMER: RegionOne
+    OS_PASSWORD: password
+    OS_AUTH_URL: http://192.168.4.2:5000/v2.0
+    OS_USERNAME: admin
+    OS_TENANT_NAME: admin
   roles:
-    - packstack
+    - week4

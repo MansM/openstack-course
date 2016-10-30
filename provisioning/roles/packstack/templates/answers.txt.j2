@@ -92,14 +92,14 @@ CONFIG_DEBUG_MODE=n
 
 # Server on which to install OpenStack services specific to the
 # controller role (for example, API servers or dashboard).
-CONFIG_CONTROLLER_HOST=10.0.2.15
+CONFIG_CONTROLLER_HOST={{ second_nic_ip }}
 
 # List the servers on which to install the Compute service.
-CONFIG_COMPUTE_HOSTS=10.0.2.15
+CONFIG_COMPUTE_HOSTS={{ second_nic_ip }}
 
 # List of servers on which to install the network service such as
 # Compute networking (nova network) or OpenStack Networking (neutron).
-CONFIG_NETWORK_HOSTS=10.0.2.15
+CONFIG_NETWORK_HOSTS={{ second_nic_ip }}
 
 # Specify 'y' if you want to use VMware vCenter as hypervisor and
 # storage; otherwise, specify 'n'. ['y', 'n']
@@ -136,11 +136,11 @@ CONFIG_VCENTER_CLUSTER_NAMES=
 
 # (Unsupported!) Server on which to install OpenStack services
 # specific to storage servers such as Image or Block Storage services.
-CONFIG_STORAGE_HOST=10.0.2.15
+CONFIG_STORAGE_HOST={{ second_nic_ip }}
 
 # (Unsupported!) Server on which to install OpenStack services
 # specific to OpenStack Data Processing (sahara).
-CONFIG_SAHARA_HOST=10.0.2.15
+CONFIG_SAHARA_HOST={{ second_nic_ip }}
 
 # Specify 'y' to enable the EPEL repository (Extra Packages for
 # Enterprise Linux). ['y', 'n']
@@ -277,7 +277,7 @@ CONFIG_SSL_CERT_SUBJECT_MAIL=admin@openstack
 CONFIG_AMQP_BACKEND=rabbitmq
 
 # IP address of the server on which to install the AMQP service.
-CONFIG_AMQP_HOST=10.0.2.15
+CONFIG_AMQP_HOST={{ second_nic_ip }}
 
 # Specify 'y' to enable SSL for the AMQP service. ['y', 'n']
 CONFIG_AMQP_ENABLE_SSL=n
@@ -299,7 +299,7 @@ CONFIG_AMQP_AUTH_PASSWORD=PW_PLACEHOLDER
 # installation was not specified in CONFIG_MARIADB_INSTALL, specify
 # the IP address of an existing database server (a MariaDB cluster can
 # also be specified).
-CONFIG_MARIADB_HOST=10.0.2.15
+CONFIG_MARIADB_HOST={{ second_nic_ip }}
 
 # User name for the MariaDB administrative user.
 CONFIG_MARIADB_USER=root
@@ -346,7 +346,7 @@ CONFIG_KEYSTONE_TOKEN_FORMAT=UUID
 CONFIG_KEYSTONE_IDENTITY_BACKEND=sql
 
 # URL for the Identity service LDAP backend.
-CONFIG_KEYSTONE_LDAP_URL=ldap://10.0.2.15
+CONFIG_KEYSTONE_LDAP_URL=ldap://{{ second_nic_ip }}
 
 # User DN for the Identity service LDAP backend.  Used to bind to the
 # LDAP server if the LDAP server does not allow anonymous
@@ -1273,10 +1273,10 @@ CONFIG_CEILOMETER_COORDINATION_BACKEND=redis
 CONFIG_CEILOMETER_METERING_BACKEND=database
 
 # IP address of the server on which to install MongoDB.
-CONFIG_MONGODB_HOST=10.0.2.15
+CONFIG_MONGODB_HOST={{ second_nic_ip }}
 
 # IP address of the server on which to install the Redis server.
-CONFIG_REDIS_HOST=10.0.2.15
+CONFIG_REDIS_HOST={{ second_nic_ip }}
 
 # Port on which the Redis server listens.
 CONFIG_REDIS_PORT=6379

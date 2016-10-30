@@ -1,5 +1,8 @@
+- name: enable yum cache
+  lineinfile: dest=/etc/yum.conf regexp='^(.*)keepcache=(.*)' line='keepcache=1'
+  
 - name: install packstack repo
-  yum: name=https://rdoproject.org/repos/rdo-release.rpm state=present
+  yum: name=https://repos.fedorapeople.org/repos/openstack/openstack-mitaka/rdo-release-mitaka-5.noarch.rpm state=present
 
 - name: installing repo (CentOS)
   yum: name=centos-release-openstack-mitaka state=present
@@ -7,15 +10,14 @@
 
 - name: disabling NetworkManager
   service: name=NetworkManager enabled=no state=stopped
-
-- name: restart Networking
-  service: name=network state=restarted
+  notify:
+    - restart Networking
 
 - name: installing packstack
   yum: name=openstack-packstack state=present
 
 - name: answerfile
   template: src=answers.txt.j2 dest=/root/answers.txt
+  notify: 
+  - installing openstack
 
-- name: installing openstack
-  command: packstack --answer-file /root/answers.txt
