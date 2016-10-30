@@ -1,8 +1,8 @@
 ---
-# - hosts: openstack
-#   become: yes
-#   roles:
-#     - packstack
+- hosts: openstack
+  become: yes
+  roles:
+    - packstack
 
 
 - hosts: openstack
