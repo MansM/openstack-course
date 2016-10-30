@@ -1,0 +1,51 @@
+- name: creating internalnetwork
+  os_network:
+    state: present
+    project: '{{ PERSONAL_USER }}_project'
+    name: '{{ PERSONAL_USER }}_intnetwork'
+    external: false
+
+- name: creating internal subnet
+  os_subnet:
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    state: present
+    network_name: '{{ PERSONAL_USER }}_intnetwork'
+    name: '{{ PERSONAL_USER }}_intsubnet'
+    cidr: 192.168.0.0/24
+    dns_nameservers:
+       - 8.8.8.7
+       - 8.8.8.8
+    allocation_pool_start: 192.168.0.25
+    allocation_pool_end: 192.168.0.99
+
+- name: creating external network
+  os_network:
+    state: present
+    project: '{{ PERSONAL_USER }}_project'
+    name: '{{ PERSONAL_USER }}_extnetwork'
+    external: true
+
+- name: creating external subnet
+  os_subnet:
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    state: present
+    network_name: '{{ PERSONAL_USER }}_extnetwork'
+    name: '{{ PERSONAL_USER }}_extsubnet'
+    cidr: 192.168.4.0/24
+    enable_dhcp: false
+    dns_nameservers:
+       - 8.8.8.7
+       - 8.8.8.8
+    host_routes:
+     - destination: 0.0.0.0/0
+       nexthop: 10.0.2.2
+     - destination: 192.168.4.0/24
+       nexthop: 192.168.4.2

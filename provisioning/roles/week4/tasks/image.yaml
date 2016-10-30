@@ -1,0 +1,16 @@
+- name: downloading cirros image
+  get_url: 
+    url: http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img
+    dest: /root/cirros.img
+- name: uploading cirros image
+  os_image:
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    name: cirros
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: /root/cirros.img

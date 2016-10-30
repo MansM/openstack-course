@@ -1,0 +1,15 @@
+- os_security_group:
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    state: present
+    name: mans-sec
+    description: security group for {{ PERSONAL_USER }}_project
+- os_security_group_rule:
+    security_group: mans-sec
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0

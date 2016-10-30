@@ -1,3 +1,6 @@
+- name: fix searchdomain blah!
+  lineinfile: dest=/etc/resolv.conf state=absent regexp="^search (.*)"
+  
 - name: enable yum cache
   lineinfile: dest=/etc/yum.conf regexp='^(.*)keepcache=(.*)' line='keepcache=1'
   

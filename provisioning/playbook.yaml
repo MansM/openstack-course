@@ -4,19 +4,28 @@
   roles:
     - packstack
 
+#Patches on openstack install
+- hosts: openstack
+  become: yes
+  tasks:
+    - name: fixing nova api blah
+      lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)api_servers=(.*)' line='api_servers=http://192.168.4.2:9292'
+    - name: restart nova
+      service: name=openstack-nova-compute.service state=restarted
+
 
 - hosts: openstack
   become: yes
   environment:
     OS_REGION_NAMER: RegionOne
     OS_PASSWORD: '{{ CONFIG_KEYSTONE_ADMIN_PW }}'
-    OS_AUTH_URL: http://192.168.4.2:5000/v2.0
+    OS_AUTH_URL: http://{{ second_nic_ip }}:5000/v2.0
     OS_USERNAME: admin
     OS_TENANT_NAME: admin
   vars:
     auth_dict:
       password: '{{ CONFIG_KEYSTONE_ADMIN_PW }}'
-      auth_url: http://192.168.4.2:5000/v2.0
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
       username: admin
     #WORKAROUND: https://github.com/ansible/ansible-modules-core/issues/4520
   roles:

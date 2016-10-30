@@ -1,0 +1,14 @@
+- name: create os project
+  os_project:
+    state: present
+    name: "{{ PERSONAL_USER }}_project"
+    domain: Default
+    description: "{{ PERSONAL_USER }}descript"
+    enabled: True
+- name: create os user
+  os_user:
+    auth: '{{ auth_dict }}'
+    state: present
+    name: "{{ PERSONAL_USER }}"
+    password: "{{ PERSONAL_USER }}"
+    default_project: "{{ PERSONAL_USER }}_project"
