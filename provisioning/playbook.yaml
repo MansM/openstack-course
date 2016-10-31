@@ -10,8 +10,10 @@
   tasks:
     - name: fixing nova api blah
       lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)api_servers=(.*)' line='api_servers=http://192.168.4.2:9292'
-    - name: restart nova
+    - name: restart nova-compute
       service: name=openstack-nova-compute.service state=restarted
+    - name: restart nova-api
+      service: name=openstack-nova-api.service state=restarted
 
 
 - hosts: openstack

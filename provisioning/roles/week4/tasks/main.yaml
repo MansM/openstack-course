@@ -4,8 +4,8 @@
 - name: install shade
   pip: name=shade state=present
 
-- include: secgroup.yaml
 - include: project.yaml
+- include: secgroup.yaml
 - include: image.yaml
 - include: network.yaml
 

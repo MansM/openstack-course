@@ -11,4 +11,6 @@
     state: present
     name: "{{ PERSONAL_USER }}"
     password: "{{ PERSONAL_USER }}"
+    email: demo@example.com
+    domain: Default
     default_project: "{{ PERSONAL_USER }}_project"
