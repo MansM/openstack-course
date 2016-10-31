@@ -13,9 +13,10 @@
 
 - name: disabling NetworkManager
   service: name=NetworkManager enabled=no state=stopped
-  notify:
-    - restart_networking
 
+- name: restart_networking
+  service: name=network state=restarted
+  
 - name: installing packstack
   yum: name=openstack-packstack state=present
 

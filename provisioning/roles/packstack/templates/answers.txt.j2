@@ -42,15 +42,15 @@ CONFIG_HORIZON_INSTALL=y
 CONFIG_SWIFT_INSTALL=y
 
 # Specify 'y' to install OpenStack Metering (ceilometer). ['y', 'n']
-CONFIG_CEILOMETER_INSTALL=y
+CONFIG_CEILOMETER_INSTALL=n
 
 # Specify 'y' to install OpenStack Telemetry Alarming (Aodh). Note
 # Aodh requires Ceilometer to be installed as well. ['y', 'n']
-CONFIG_AODH_INSTALL=y
+CONFIG_AODH_INSTALL=n
 
 # Specify 'y' to install OpenStack Metering as a Service (gnocchi).
 # ['y', 'n']
-CONFIG_GNOCCHI_INSTALL=y
+CONFIG_GNOCCHI_INSTALL=n
 
 # Specify 'y' to install OpenStack Data Processing (sahara). In case
 # of sahara installation packstack also installs heat.['y', 'n']
@@ -77,7 +77,7 @@ CONFIG_NTP_SERVERS={{ CONFIG_NTP_SERVERS }}
 # Specify 'y' to install Nagios to monitor OpenStack hosts. Nagios
 # provides additional tools for monitoring the OpenStack environment.
 # ['y', 'n']
-CONFIG_NAGIOS_INSTALL=y
+CONFIG_NAGIOS_INSTALL=n
 
 # Comma-separated list of servers to be excluded from the
 # installation. This is helpful if you are running Packstack a second
