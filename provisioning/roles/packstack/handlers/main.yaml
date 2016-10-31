@@ -1,5 +1,5 @@
 - name: installing openstack
   command: packstack --answer-file /root/answers.txt
 
-- name: restart Networking
+- name: restart_networking
   service: name=network state=restarted
