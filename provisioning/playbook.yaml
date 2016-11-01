@@ -39,8 +39,8 @@
 - hosts: openstack
   become: yes
   tasks:
-    service: name={{ item }} state=restarted
-    with_item:
-      - neutron-server
-      - openstack-nova-api.service
-      - openstack-nova-compute
+    - service: name={{ item }} state=restarted
+      with_items:
+        - neutron-server
+        - openstack-nova-api.service
+        - openstack-nova-compute
