@@ -5,10 +5,10 @@
   lineinfile: dest=/etc/yum.conf regexp='^(.*)keepcache=(.*)' line='keepcache=1'
   
 - name: install packstack repo
-  yum: name=https://repos.fedorapeople.org/repos/openstack/openstack-mitaka/rdo-release-mitaka-5.noarch.rpm state=present
+  yum: name=https://repos.fedorapeople.org/repos/openstack/openstack-{{ OS_RELEASE }}/rdo-release-{{ OS_RELEASE }}-{{ OS_REVISION }}.noarch.rpm state=present
 
 - name: installing repo (CentOS)
-  yum: name=centos-release-openstack-mitaka state=present
+  yum: name=centos-release-openstack-{{ OS_RELEASE }} state=present
   when: ansible_distribution ==  'CentOS' and ansible_distribution_major_version == '7'
 
 - name: disabling NetworkManager
@@ -16,7 +16,7 @@
 
 - name: restart_networking
   service: name=network state=restarted
-  
+
 - name: installing packstack
   yum: name=openstack-packstack state=present
 
