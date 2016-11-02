@@ -1,5 +1,7 @@
 ## read this first
 
+This is my code for: https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS152x+3T2016/
+
 * change in provisioning/group_vars/all your personal user (this will be username and password)
 * currently it will install newton-3 but you can revert back to mitaka-5 with changing the vars in the all file.
 * vagrant up will probably fail, because of a yum error... vagrant provision until exit code 0
