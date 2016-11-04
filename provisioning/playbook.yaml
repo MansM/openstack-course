@@ -1,39 +1,39 @@
 ---
-# - hosts: openstack
-#   become: yes
-#   roles:
-#     - packstack
+- hosts: openstack
+  become: yes
+  roles:
+    - packstack
 
-# #Patches on openstack install
-# - hosts: openstack
-#   become: yes
-#   tasks:
-#     - name: fixing nova api blah
-#       lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)api_servers=(.*)' line='api_servers=http://192.168.4.2:9292'
-#       notify:
-#         - restart nova-compute
-#         - restart nova-api
-#     - name: fixing nova vnc blah
-#       lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)vncserver_proxyclient_address=(.*)' line='vncserver_proxyclient_address=192.168.4.2'
-#       notify:
-#         - restart nova-compute
-#         - restart nova-api
-#   handlers: 
-#     - name: restart nova-compute
-#       service: name=openstack-nova-compute.service state=restarted
-#     - name: restart nova-api
-#       service: name=openstack-nova-api.service state=restarted
+#Patches on openstack install
+- hosts: openstack
+  become: yes
+  tasks:
+    - name: fixing nova api blah
+      lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)api_servers=(.*)' line='api_servers=http://192.168.4.2:9292'
+      notify:
+        - restart nova-compute
+        - restart nova-api
+    - name: fixing nova vnc blah
+      lineinfile: dest=/etc/nova/nova.conf regexp='^(.*)vncserver_proxyclient_address=(.*)' line='vncserver_proxyclient_address=192.168.4.2'
+      notify:
+        - restart nova-compute
+        - restart nova-api
+  handlers: 
+    - name: restart nova-compute
+      service: name=openstack-nova-compute.service state=restarted
+    - name: restart nova-api
+      service: name=openstack-nova-api.service state=restarted
 
-# # #weird errors galore for mitaka
-# - hosts: openstack
-#   become: yes
-#   tasks:
-#     - service: name={{ item }} state=restarted
-#       with_items:
-#         - neutron-server
-#         - openstack-nova-api.service
-#         - openstack-nova-compute
-#       when: OS_RELEASE == "mitaka"
+# #weird errors galore for mitaka
+- hosts: openstack
+  become: yes
+  tasks:
+    - service: name={{ item }} state=restarted
+      with_items:
+        - neutron-server
+        - openstack-nova-api.service
+        - openstack-nova-compute
+      when: OS_RELEASE == "mitaka"
 
 - hosts: openstack
   become: yes
