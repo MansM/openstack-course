@@ -1,0 +1,19 @@
+- name: create instance
+  os_server: 
+    state: present
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    name: mans_instance_1
+    image: cirros
+    timeout: 200
+    flavor: m1.tiny
+    nics:
+      - net-name: '{{ PERSONAL_USER }}_intnetwork'
+    security_groups: 
+      - default
+      - "{{ PERSONAL_USER }}_sec"
+    volumes:
+      - "{{ PERSONAL_USER }}_volume1"

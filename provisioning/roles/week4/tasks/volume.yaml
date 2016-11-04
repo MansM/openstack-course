@@ -1,0 +1,10 @@
+- name: create volume
+  os_volume:
+    auth:
+      project_name: "{{ PERSONAL_USER }}_project"
+      auth_url: http://{{ second_nic_ip }}:5000/v2.0
+      username: '{{ PERSONAL_USER }}'
+      password: '{{ PERSONAL_USER }}'
+    size: 1
+    state: present
+    display_name: "{{ PERSONAL_USER }}_volume1"
